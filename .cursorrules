@@ -1,0 +1,18 @@
+# Grid Governance Engine — Cursor Rules
+
+## ARCHITECTURE COMPLIANCE
+
+**BEFORE WRITING CODE:** Analyze the `ARCHITECTURAL_BLUEPRINT.md`. Ensure the new logic follows the **Proposal vs. Execution** pattern. The AI proposes; the Validator enforces. No proposal reaches the ledger until it passes validation.
+
+**DATA INTEGRITY:** If the code involves balance updates, ensure it hits the ledger table via the app validation service, **NOT** via direct SQL inside an n8n node. The Validator is the single writer for ledger and balances.
+
+**QA GATE:** Every new feature must include a `/tests` file that validates the logic against the WorldState constraints. See `TASKS.md` for the Spec-Driven Development loop and GIVEN-WHEN-THEN format.
+
+---
+
+## SPEC-DRIVEN DEVELOPMENT
+
+1. **Test first:** Generate the test (GIVEN-WHEN-THEN) before the implementation.
+2. **Run the test:** It should fail initially (no implementation yet).
+3. **Implement:** Write the minimal code to make the test pass.
+4. **Verify:** Only after the test passes is the code considered correct.
